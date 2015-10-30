@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+		    <meta charset="utf-8">
+		    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    		<meta name="viewport" content="width=device-width, initial-scale=1">        
+            <link rel="stylesheet" href="style.css" />
+        {% endblock %}
+        <title>{% block title %}{% endblock %} - My Webpage</title>
+    	<link rel="stylesheet" type="text/css" href="app/assets/bootstrap/css/bootstrap.min.css">
+    	<link rel="stylesheet" type="text/css" href="app/assets/bootstrap/css/bootstrap-theme.css"> 
+    	<script src="app/assets/bootstrap/js/jquery.min.js"></script>
+    	<script src="app/assets/bootstrap/js/bootstrap.min.js"></script>  
+        <style>
+        	{% block css %}
+        	{% endblock %}
+        </style>
+        <script>
+        	$(function(){
+        		//return;
+        		$(document).off('.data-api');
+        		$('.dropdown-toggle').dropdown();
+				$('.nav-tabs li a').click(function (e) {
+				  e.preventDefault()
+				  $(this).tab('show');
+				})        		
+        	});
+        </script>
+    </head>
+    <body>
+        <div id="content">{% block content %}{% endblock %}</div>
+        <div id="footer">
+            {% block footer %}
+                &copy; Copyright 2011 by <a href="http://domain.invalid/">you</a>.
+            {% endblock %}
+        </div>
+    </body>
+</html>

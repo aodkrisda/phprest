@@ -1,0 +1,212 @@
+
+{% macro dropdown (n) %}
+	<div class="dropdown">
+	  <button class="btn btn-default dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	    Dropdown ({{n}})
+	    <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu">
+	  	<li class="dropdown-header">Dropdown header</li>
+	    <li class="disabled"><a href="#">Action</a></li>
+	    <li><a href="#">Another action</a></li>
+	    <li><a href="#">Something else here</a></li>
+	    <li role="separator" class="divider"></li>
+	    <li><a href="#">Separated link</a></li>
+	  </ul>
+	</div>
+{% endmacro %}
+
+{% macro dropdown_button (n) %}
+	<div class="btn-group">
+	  <button type="button" class="btn btn-warning">Action ({{n}})</button>
+	  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    <span class="caret"></span>
+	    <span class="sr-only">Toggle Dropdown</span>
+	  </button>
+	  <ul class="dropdown-menu">
+	    <li><a href="#">Action</a></li>
+	    <li><a href="#">Another action</a></li>
+	    <li><a href="#">Something else here</a></li>
+	    <li role="separator" class="divider"></li>
+	    <li><a href="#">Separated link</a></li>
+	  </ul>
+</div>
+{% endmacro %}
+
+{% macro tabs(its,a=0) %}
+<ul class="nav nav-tabs">
+  {% for i in its %}
+  <li role="presentation" class="zz {{(a==loop.index0)?'active':''}}"><a href="#">{{i}}</a></li>
+  {% endfor %}
+</ul>
+{% endmacro %}
+
+{% macro create_form(fields, data) %}
+	{% spaceless %}
+	{% if fields %}
+		{% for f in fields %}
+			{% if f.name -%}
+			{% set error = (data.errors and data.errors[f.name])?' has-error':'' %}
+			{% set type = f.type | default('text') | lower %}
+			<div class="form-group has-feedback {{error}}">
+				{% if type=='checkbox' %}
+					<div  class="checkbox">
+					<label>
+						<input {{f.attrs | to_attributes| raw}} type="checkbox" name="{{f.name}}" value="{{f.value | default('true')}}"  />
+						{{ f.label | default(name)}}
+					</label>
+					</div>
+				{% elseif type=='radio' %}
+					<div  class="radio">
+					<label>
+						<input {{f.attrs | to_attributes| raw}} type="radio" name="{{f.name}}" value="{{f.value | default('true')}}"  />
+						{{ f.label | default(name)}}
+					</label>
+					</div>			
+				{% else %}
+					<label class="control-label">{{ f.label | default(name)}}</label>
+					{% if type == 'textarea' %}
+						<textarea  class="form-control" {{f.attrs | to_attributes | raw}} name="{{ f.name }}" rows="{{f.rows | default(5)}}">{{attribute(data,f.name) | default('')}}</textarea>
+					{% else %}
+			    		<input {{f.attrs | to_attributes| raw}} class="form-control" type="{{type}}" name="{{f.name}}" value="{{attribute(data,f.name) | default('')}}"  />
+						{% if data.errors and data.errors[f.name] %}
+						 <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+						{% endif %}				
+			    	{% endif %}
+				    {% if data.errors and data.errors[f.name] %}
+				    	<p class="help-block">{{data.errors[f.name]}}</p>
+				    {% elseif f.help %}
+				   		<p class="help-block">{{f.help}}</p>
+				    {% endif %}
+			    {% endif %}
+			</div>
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+	{% endspaceless %}
+{% endmacro %}
+
+
+
+{% macro input_text(name,label, data) %}
+	<div class="form-group">
+		<label class="control-label">{{ name }}</div>
+    	<input class="form-control" type="text" name="{{ name }}" value="{{attribute(data,name) | default(name)}}"  />
+	    {%if data.errors and data.errors[name] %}
+	    	<p class="help-block">{{data.errors[name]}}</p>
+	    {% endif %}
+	</div>
+{% endmacro %}
+
+{% macro navbar() %}
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">Brand</a>
+	    </div>
+	
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+	        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+	        <li><a href="#">Link</a></li>
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="#">Action</a></li>
+	            <li><a href="#">Another action</a></li>
+	            <li><a href="#">Something else here</a></li>
+	            <li role="separator" class="divider"></li>
+	            <li><a href="#">Separated link</a></li>
+	            <li role="separator" class="divider"></li>
+	            <li><a href="#">One more separated link</a></li>
+	          </ul>
+	        </li>
+	      </ul>
+	      <form class="navbar-form navbar-left" role="search">
+	        <div class="form-group">
+	          <input type="text" class="form-control" placeholder="Search">
+	        </div>
+	        <button type="submit" class="btn btn-default">Submit</button>
+	      </form>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="#">Link</a></li>
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="#">Action</a></li>
+	            <li><a href="#">Another action</a></li>
+	            <li><a href="#">Something else here</a></li>
+	            <li role="separator" class="divider"></li>
+	            <li><a href="#">Separated link</a></li>
+	          </ul>
+	        </li>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+{% endmacro %}
+
+
+{% macro thumnail(param) %}
+	{% set src=param.src | default('http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg') %}
+	{% set caption=param.caption | default('Enter caption...') %}
+	{% set title=param.desc | default('Enter desc...') %}
+	{% set actions=param.actions | default('') %}
+	{% set html=(not not param.html) %}
+	{% set alt=(param.alt | default('')) %}
+	<div class="col-sm-6 col-md-4 col-lg-3">
+	<div class="thumbnail">
+      <img src="{{src}}" alt="{{alt}}">
+      <div class="caption">
+        <h3>{% if html %}{{caption|raw}}{% else %}{{caption}}{% endif %}</h3>
+        <p>{% if html %}{{caption|raw}}{% else %}{{caption}}{% endif %}</p>
+        {% if action %}<p>{% if html %}{{actions|raw}}{% else %}{actions}}{% endif %}</p>{% endif %}
+      </div>
+    </div>
+    </div>
+{% endmacro %}
+
+{% macro alert(param) %}
+	{% set text=param.text | default('Enter your message ...') %}
+	{% set type=param.type | default('alert-warning') %}
+	{% set html=(not not param.html) %}
+	{% set dismiss=(param.dismiss is defined) ? (not not param.dismiss):true %}
+	<div class="alert alert-dismissible {{type}}" role="alert">
+	  {%if dismiss %}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{% endif %}
+	  {% if html %}{{text|raw}}{% else %}{{text}}{% endif %}
+	</div>
+{% endmacro %}
+{% macro progress_bar(param) %}
+	{% set text=param.text | default('Complete (success)') %}
+	{% set percent=param.percent | default(25) %}
+	{% set type=param.type | default('progress-bar-success') %}
+	{% set striped=(param.striped)?'progress-bar-striped':'' %}
+	<div class="progress">
+	  	<div class="progress-bar {{type}} {{striped}}" role="progressbar" aria-valuenow="{{percent}}" aria-valuemin="0" aria-valuemax="100" style="width:{{percent}}%">
+	    	<span>{{percent}}% {{text}}</span>
+	  	</div>
+	</div>
+{% endmacro %}
+
+{% macro media(param) %}
+{% set src=param.src | default('http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg') %}
+<div class="media">
+  <div class="media-left">
+    <a href="#">
+      <img class="media-object" src="{{src}}" alt="{{alt}}">
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">Media heading</h4>
+    {{desc}}...
+  </div>
+</div>
+{% endmacro %}

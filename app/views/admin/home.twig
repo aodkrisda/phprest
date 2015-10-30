@@ -1,0 +1,36 @@
+{#
+{% extends "@admin/layout.twig" %}
+{% block content %}
+	<ul>
+		{% for it in users %}
+
+		<li>{{it.user_id}} - {{it.first_name}} {{it.last_name}}</li>
+{% endfor %}
+		
+	</ul>
+
+		{% endblock %}
+#}		
+
+<?xml ?>
+<doc>
+{% for it in users %}
+  <row id="{{loop.index}}"><fist>{{ it.first_name |e }}</first><last>{{ it.last_name |e}}</last></row>
+{% endfor -%}
+</doc>
+{% set src %}
+<script>
+	var name="krisda \"<b>doi</b>\" test";
+	function test(){
+		window.alert(5);
+	}
+</script>
+{% endset %}
+
+{{ src}}
+
+
+{{ baseUrl() }}
+{{ siteUrl() }}
+{{ currentUrl() }}
+

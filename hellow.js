@@ -1,0 +1,1 @@
+console.dir ('New Script xxx' );console.dir(module); console.log(new Date());console.dir(angular); alert(555)

@@ -1,0 +1,38 @@
+{% extends 'layout.twig' %}
+{% import 'bs.twig' as bs %}
+{% block content %}
+
+{% set errors = attribute(flash.getMessages(),'errors') %}
+
+{% 
+set fields=[
+{name:'user', label:'User', attrs:{'data-src':'hell;aaaa&"ow'}},
+{name:'pass',label:'Password', type:'password'},
+{name:'desc', 'label':'Description', type:'textarea', value:'Enter desc'},
+{name:'chk1', label:'Check Me1', type:'checkbox', value:'1'},
+{name:'chk2', label:'Check Me2', type:'checkbox', value:'2'}
+]
+%}
+
+{{ bs.navbar() }}
+
+
+
+<div class="container">
+<div clas="row">
+<div class="col-md-6 col-md-offset-3">
+<div class="page-header">
+<h1 style="color:red"><span class="glyphicon glyphicon-user"></span> Login</h1>
+</div>
+<form method="post" action="{{baseUrl('login',true)}}">
+	{{ bs.create_form(fields, _context) }}
+	<input type="submit" value="SUBMIT"/>
+</form>
+</div>
+</div>
+
+
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,252 @@
+{% extends "layout.twig" %}
+
+{% block css %}
+{% spaceless %}
+.main {
+	margin:0px auto;
+	xwidth: 50%;
+	max-width:100%;
+}
+
+.container{
+	position: relative;
+	height: 0;
+	overflow: hidden;
+	padding-bottom:56.25%;
+
+}
+.container-4x3{
+	position: relative;
+	height: 0;
+	overflow: hidden;
+	padding-bottom:75%;
+
+}
+.container .img, .container iframe, .container-4x3 .img, .container-4x3 iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+
+}
+
+
+/* commentlist */
+.commentlist {
+	margin: 0;
+	padding: 0;
+}
+.commentlist li {
+	margin: 0 0 10px;
+	list-style: none;
+	overflow: hidden;
+	clear: both;
+}
+.commentlist ul {
+	padding: 0;
+	margin-top: 20px;
+	margin-left: 11%; /* relative value */
+}
+.commentlist .comment-text {
+	overflow: hidden;
+}
+.commentlist img {
+	float: left;
+	width:10vw;
+	max-height:10vw;
+	margin: 0 20px 20px 0;
+}
+.commentlist cite {
+	font-size: 140%;
+	font-weight: bold;
+}
+
+/* font size */
+.fontsize-demo .box {
+	margin: 30px 0;
+	line-height: 140%;
+}
+.fontsize-demo h1 {
+	font-size: 2em;
+	line-height: 140%;
+	color: #666;
+	margin: 0 0 .3em;
+}
+.fontsize-demo .smaller {
+	font-size: 80%;
+	line-height: 130%;
+}
+.fontsize-demo .bigger {
+	font-size: 120%;
+}
+
+/* relative padding */
+.relative-padding {
+	background: #eee;
+	border: solid 1px #ddd;
+	padding: 3% 5%;
+}
+
+
+
+.overflow-demo {
+	overflow: hidden; /* this will clear the float from .item */
+}
+.overflow-demo .item {
+	width: 45%;
+	margin-left: 2.5%;
+	margin-right: 2.5%; 
+	float: left;
+}
+.overflow-demo .item img {
+	float: left;
+	width:100%;
+	max-height:25vw;
+	height:auto;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+.overflow-demo .item .content {
+	overflow: hidden; /* this will clear the float from .item img */
+	min-width: 130px;
+}
+.overflow-demo h4 {
+	font-size: 1.4em;
+	margin: 0 0 5px;
+	padding: 0;
+	color: #666;
+}
+
+
+.break-word {
+		word-wrap: break-word;
+}
+{% endspaceless %}
+{% endblock %}
+
+
+{% block content %}
+<div class="main">
+{{siteUrl('home/index')}}<br>
+{{siteUrl('home/index',true)}}<br>
+{{baseUrl('home/index')}}<br>
+{{baseUrl('home/index',true)}}<br>
+{{currentUrl()}}<br>
+
+
+
+
+	<div class="container">
+		<iframe  src="https://www.youtube.com/embed/EYE-NRmk5iU" frameborder="0" allowfullscreen></iframe>
+	</div>
+	<div class="container">
+		<img class="img" src="{{baseUrl('public/images/girl2.jpg')}}"/>
+	</div>
+
+	<div class="main">
+		<div class="container">
+			<img class="img" src="{{baseUrl('public/images/girl.jpg"')}}/>
+		</div>
+		<div class="container">
+			<img class="img" src="{{baseUrl('public/images/girl2.jpg')}}"/>
+		</div>	
+	</div>	
+	
+	<h3>Overflow</h3>
+	<div class="overflow-demo">
+		<div class="item">
+			<img src="public/images/girl.jpg" alt="1">
+			<div class="content">
+				<h4>Sample Content</h4>
+				<p>Cras ultricies cursus nisl, eget congue tellus consequat nec. Cras id nibh neque, eu dignissim orci. Aenean at adipiscing urna. Suspendisse potenti. Suspendisse vitae tellus a neque commodo rutrum. Praesent ac neque vitae massa pharetra pellentesque. Aenean at adipiscing urna. Suspendisse potenti. Suspendisse vitae tellus a neque commodo rutrum. Praesent ac neque vitae massa pharetra pellentesque. Pellentesque vestibulum elit at metus venenatis non faucibus massa egestas.</p>
+			</div>
+		</div>
+		<!-- /item -->
+	
+		<div class="item">
+			<img src="pupublic/images/girl2.jpgblic/images/girl2.jpg" alt="2">
+			<div class="content">
+				<h4>Sample Content</h4>
+				<p>Cras ultricies cursus nisl, eget congue tellus consequat nec. Cras id nibh neque, eu dignissim orci. Aenean at adipiscing urna. Suspendisse potenti. Suspendisse vitae tellus a neque commodo rutrum. Praesent ac neque vitae massa pharetra pellentesque. Aenean at adipiscing urna. Suspendisse potenti. Suspendisse vitae tellus a neque commodo rutrum. Praesent ac neque vitae massa pharetra pellentesque. Pellentesque vestibulum elit at metus venenatis non faucibus massa egestas.</p>
+			</div>
+		</div>
+		<!-- /item -->
+	
+	</div>	
+	
+	
+	
+<h3>Relative Value</h3>
+	
+<h4>Relative Margin</h4>
+<ul class="commentlist">
+	<li>
+		<img src="public/images/girl.jpg" alt="1">
+		<div class="comment-text">
+			<cite>Comment</cite>
+			<p>Cras ultricies cursus nisl, eget congue tellus consequat nec. Cras id nibh neque, eu dignissim orci. Aenean at adipiscing urna. Suspendisse potenti. Suspendisse vitae tellus a neque commodo rutrum. Praesent ac neque vitae massa pharetra pellentesque.</p>
+		</div>
+
+		<ul>
+			<li>
+				<img src="public/images/girl2.jpg" alt="2">
+				<div class="comment-text">
+					<cite>Comment</cite>
+					<p>Cras ultricies cursus nisl, eget congue tellus consequat nec. Cras id nibh neque, eu dignissim orci. Aenean at adipiscing urna. Suspendisse potenti. Suspendisse vitae tellus a neque commodo rutrum. Praesent ac neque vitae massa pharetra pellentesque.</p>
+				</div>
+				
+				<ul>
+					<li>
+						<img src="public/images/girl.jpg" alt="3">
+						<div class="comment-text">
+							<cite>Comment</cite>
+							<p>Cras ultricies cursus nisl, eget congue tellus consequat nec. Cras id nibh neque, eu dignissim orci. Aenean at adipiscing urna. Suspendisse potenti. Suspendisse vitae tellus a neque commodo rutrum. Praesent ac neque vitae massa pharetra pellentesque.</p>
+						</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li>
+		<img src="public/images/girl2.jpg" alt="4">
+		<div class="comment-text">
+			<cite>Comment</cite>
+			<p>Cras ultricies cursus nisl, eget congue tellus consequat nec. Cras id nibh neque, eu dignissim orci. Aenean at adipiscing urna. Suspendisse potenti. Suspendisse vitae tellus a neque commodo rutrum. Praesent ac neque vitae massa pharetra pellentesque.</p>
+		</div>
+	</li>
+</ul>
+
+<h4>Font Size &amp; Relative Padding</h4>
+<div class="fontsize-demo">
+	<div class="box">
+		<h1>Heading (normal)</h1>
+		<p>Cras ultricies cursus nisl, eget congue tellus consequat nec. Cras id nibh neque, eu dignissim orci. </p>
+	</div>
+	<div class="box smaller">
+		<h1>Heading (smaller)</h1>
+		<p>Cras ultricies cursus nisl, eget congue tellus consequat nec. Cras id nibh neque, eu dignissim orci. </p>
+	</div>
+	<div class="box bigger">
+		<h1>Heading (bigger)</h1>
+		<p>Cras ultricies cursus nisl, eget congue tellus consequat nec. Cras id nibh neque, eu dignissim orci. </p>
+	</div>
+</div>
+
+<h4>Relative Padding</h4>
+<div class="relative-padding">
+	<p>Cras ultricies cursus nisl, eget congue tellus consequat nec. Cras id nibh neque, eu dignissim orci. Aenean at adipiscing urna. Suspendisse potenti. Suspendisse vitae tellus a neque commodo rutrum. Praesent ac neque vitae massa pharetra pellentesqu. Cras ultricies cursus nisl, eget congue tellus consequat nec. Cras id nibh neque, eu dignissim orci. </p>
+</div>	
+
+
+
+<h3>Word-break</h3>
+<div class="break-word">
+	<p>http://www.webdesignerwall.com_this_is_a_demo_text_:_you_can_force_unbreaking_text_such_as_url_link_into_new_lines_by_using_word_wrap_break_word_css_property</p>
+</div>
+
+
+
+</div>
+
+{% endblock %}
